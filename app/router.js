@@ -5,6 +5,9 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/', controller.home.index);
-  router.get('/getActivity', controller.home.getActivity);
+  router.get('/', controller.activityDataController.index);
+  router.get('/getObject', controller.activityObjectController.getAllObject);
+  router.post('/setObject', controller.activityObjectController.setObject);
+  router.get('/getActivity', controller.activityDataController.getActivity);
+  router.post('/saveActivity', controller.activityDataController.saveActivity);
 };

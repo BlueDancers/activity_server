@@ -19,16 +19,23 @@ module.exports = appInfo => {
   config.middleware = [];
 
   // add your user config here
-  const userConfig = {
+  const userConfig = {};
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  };
+
+  config.security = {
     csrf: {
       enable: false,
-      ignoreJSON: true,
     },
     domainWhiteList: [ 'http://localhost:8080' ],
   };
-  config.cors = {
-    origin: '*',
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  exports.mongoose = {
+    client: {
+      url: 'mongodb://127.0.0.1/activityData',
+      options: {},
+    },
   };
 
   return {
