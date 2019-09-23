@@ -6,11 +6,11 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   /**
-   * objectId 为项目id
+   * objectName 为项目名 与主表
    */
   const DataSchema = new Schema({
+    objectName: { type: String },
     name: { type: String },
-    objectId: { type: String },
     text: { type: String },
     css: { type: Object },
   });

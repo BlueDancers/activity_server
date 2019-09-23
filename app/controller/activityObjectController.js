@@ -9,10 +9,20 @@ class activityObjectController extends Controller {
   }
   async setObject() {
     const { ctx } = this;
-    const result = await ctx.service.activityObjectService.setActivityData(
-      ctx.request.body
-    );
-    ctx.body = result;
+    await ctx.service.activityObjectService
+      .setActivityData(ctx.request.body)
+      .then(result => {
+        ctx.body = {
+          data: result,
+          code: 200,
+        };
+      })
+      .catch(err => {
+        ctx.body = {
+          data: err,
+          code: 500,
+        };
+      });
   }
 }
 

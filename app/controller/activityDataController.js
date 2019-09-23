@@ -16,7 +16,10 @@ class activityDataController extends Controller {
     const result = await ctx.service.activityDataService.setActivityData(
       ctx.request.body
     );
-    ctx.body = result;
+    ctx.body = {
+      data: result,
+      code: 200,
+    };
   }
 }
 
