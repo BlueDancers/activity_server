@@ -13,7 +13,13 @@ class activityObjectService extends Service {
     if (ActivityList.length > 0) {
       return Promise.reject('当前项目已经存在');
     }
-    return await this.ctx.model.ActivityObject.create(data).then(() => {
+    let { name, disp } = data;
+
+    return await this.ctx.model.ActivityObject.create({
+      name,
+      disp,
+      time: new Date().getTime()
+    }).then(() => {
       return data.name;
     });
   }

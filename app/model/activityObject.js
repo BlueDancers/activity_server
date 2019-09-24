@@ -12,6 +12,7 @@ module.exports = app => {
   const ObjectSchema = new Schema({
     name: { type: String },
     disp: { type: String },
+    time: { type: Number }
   });
   return mongoose.model('activityObject', ObjectSchema);
 };

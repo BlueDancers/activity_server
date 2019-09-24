@@ -5,7 +5,11 @@ const Controller = require('egg').Controller;
 class activityObjectController extends Controller {
   async getAllObject() {
     const { ctx } = this;
-    ctx.body = await ctx.service.activityObjectService.FindAll();
+    let data = await ctx.service.activityObjectService.FindAll();
+    ctx.body = {
+      data,
+      code: 200
+    };
   }
   async setObject() {
     const { ctx } = this;
@@ -14,13 +18,13 @@ class activityObjectController extends Controller {
       .then(result => {
         ctx.body = {
           data: result,
-          code: 200,
+          code: 200
         };
       })
       .catch(err => {
         ctx.body = {
           data: err,
-          code: 500,
+          code: 500
         };
       });
   }
