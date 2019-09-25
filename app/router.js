@@ -8,6 +8,9 @@ module.exports = app => {
   router.get('/', controller.activityDataController.index);
   router.get('/getObject', controller.activityObjectController.getAllObject);
   router.post('/setObject', controller.activityObjectController.setObject);
-  router.get('/getActivity', controller.activityDataController.getActivity);
+  router.post(
+    '/getActivity/:name',
+    controller.activityDataController.getActivity
+  );
   router.post('/saveActivity', controller.activityDataController.saveActivity);
 };
