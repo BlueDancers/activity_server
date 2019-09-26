@@ -27,8 +27,28 @@ class activityDataService extends Service {
       return Promise.reject('无此项目,请检查项目名');
     }
   }
+  /**
+   * 移动端获取数据
+   */
+  async getMobileData(name) {
+    let datas = [];
+    let object = await this.ctx.model.ActivityObject.find({ name });
+    if (object.length > 0) {
+      let data = await this.ctx.model.ActivityData.find({ objectName: name });
+      console.log('数据', data);
+      data.map(item => {
+        datas.push({
+          name: item.name,
+          text: item.text,
+          css: item.css
+        });
+      });
+      return Promise.resolve(datas);
+    } else {
+      return Promise.reject('无此项目,请检查项目名');
+    }
+  }
   async setActivityData(data) {
-    console.log(data);
     let { parentName, template } = data;
     console.log(parentName, template);
     await this.ctx.model.ActivityData.remove({ objectName: parentName });

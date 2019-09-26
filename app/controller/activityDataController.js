@@ -33,6 +33,24 @@ class activityDataController extends Controller {
       code: 200
     };
   }
+  async getMobileData() {
+    const { ctx } = this;
+    let { name } = ctx.request.body;
+    await ctx.service.activityDataService
+      .getMobileData(name)
+      .then(res => {
+        ctx.body = {
+          data: res,
+          code: 200
+        };
+      })
+      .catch(error => {
+        ctx.body = {
+          data: error,
+          code: 500
+        };
+      });
+  }
 }
 
 module.exports = activityDataController;
