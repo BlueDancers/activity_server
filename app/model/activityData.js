@@ -6,13 +6,13 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   /**
-   * objectName 为项目名 与主表
+   * 项目内部数据模型
    */
   const DataSchema = new Schema({
-    objectName: { type: String },
-    name: { type: String },
-    text: { type: String },
-    css: { type: Object },
+    objectName: { type: String }, // 项目名称
+    name: { type: String }, // dom元素映射关系
+    text: { type: String }, // dom元素具体文字
+    css: { type: Object }, // 数据
   });
   return mongoose.model('activityData', DataSchema);
 };

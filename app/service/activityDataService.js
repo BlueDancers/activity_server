@@ -22,7 +22,7 @@ class activityDataService extends Service {
           id: item._id
         });
       });
-      return Promise.resolve(datas);
+      return Promise.resolve({ data: datas, objHeight: object[0].height });
     } else {
       return Promise.reject('无此项目,请检查项目名');
     }
@@ -50,7 +50,6 @@ class activityDataService extends Service {
   }
   async setActivityData(data) {
     let { parentName, template } = data;
-    console.log(parentName, template);
     await this.ctx.model.ActivityData.remove({ objectName: parentName });
     let newData = [];
     template.map(e => {

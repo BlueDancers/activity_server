@@ -7,12 +7,13 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   /**
-   * objectId 为项目id
+   * 项目数据模型
    */
   const ObjectSchema = new Schema({
-    name: { type: String },
-    disp: { type: String },
-    time: { type: Number }
+    name: { type: String }, // 项目名称
+    disp: { type: String }, // 项目描述
+    height: { type: Number }, // 页面高度
+    time: { type: Number } // 项目创建的时间
   });
   return mongoose.model('activityObject', ObjectSchema);
 };

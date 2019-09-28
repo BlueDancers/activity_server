@@ -6,22 +6,37 @@ class activityObjectService extends Service {
   async FindAll() {
     return await this.ctx.model.ActivityObject.find({});
   }
-  async setActivityData(data) {
+  async setActivityData(name, disp, height) {
     const ActivityList = await this.ctx.model.ActivityObject.find({
-      name: data.name
+      name: name
     });
     if (ActivityList.length > 0) {
       return Promise.reject('当前项目已经存在');
     }
-    let { name, disp } = data;
-
     return await this.ctx.model.ActivityObject.create({
       name,
       disp,
+      height,
       time: new Date().getTime()
     }).then(() => {
-      return data.name;
+      return name;
     });
+  }
+  /**
+   * 更新项目高度
+   * @param {String} objName 项目名称
+   * @param {Number} height 项目高度
+   */
+  async updateByNameHeight(objName, height) {
+    try {
+      await this.ctx.model.ActivityObject.update(
+        { name: objName },
+        { height }
+      );
+      return '更新项目成功'
+    } catch (err) {
+      return err;
+    }
   }
 }
 
