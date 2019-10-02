@@ -28,7 +28,7 @@ class activityDataService extends Service {
     }
   }
   /**
-   * 移动端获取数据
+   * 移动端获取数据 包括组件数据 以及页面高度
    */
   async getMobileData(name) {
     let datas = [];
@@ -43,7 +43,7 @@ class activityDataService extends Service {
           css: item.css
         });
       });
-      return Promise.resolve(datas);
+      return Promise.resolve({ objHeight: object[0].height, datas });
     } else {
       return Promise.reject('无此项目,请检查项目名');
     }
