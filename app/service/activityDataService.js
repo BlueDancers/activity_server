@@ -40,6 +40,7 @@ class activityDataService extends Service {
         datas.push({
           name: item.name,
           text: item.text,
+          inputName: item.inputName || '',
           link: item.link || '',
           css: item.css
         });
