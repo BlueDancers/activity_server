@@ -40,6 +40,7 @@ class activityDataService extends Service {
         datas.push({
           name: item.name,
           text: item.text,
+          link: item.link || '',
           css: item.css
         });
       });
@@ -59,7 +60,7 @@ class activityDataService extends Service {
       });
     });
     return await this.ctx.model.ActivityData.create(newData).then(
-      () => '保存成功'
+      () => parentName // 将项目名称返回出去
     );
   }
 }
