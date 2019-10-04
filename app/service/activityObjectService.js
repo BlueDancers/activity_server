@@ -8,16 +8,16 @@ class activityObjectService extends Service {
   }
   async setActivityData(name, disp, height) {
     const ActivityList = await this.ctx.model.ActivityObject.find({
-      name: name
+      name,
     });
     if (ActivityList.length > 0) {
-      return Promise.reject('当前项目已经存在');
+      return Promise.reject(new Error('当前项目已经存在'));
     }
     return await this.ctx.model.ActivityObject.create({
       name,
       disp,
       height,
-      time: new Date().getTime()
+      time: new Date().getTime(),
     }).then(() => {
       return name;
     });
@@ -29,11 +29,8 @@ class activityObjectService extends Service {
    */
   async updateByNameHeight(objName, height) {
     try {
-      await this.ctx.model.ActivityObject.update(
-        { name: objName },
-        { height }
-      );
-      return '更新项目成功'
+      await this.ctx.model.ActivityObject.update({ name: objName }, { height });
+      return '更新项目成功';
     } catch (err) {
       return err;
     }

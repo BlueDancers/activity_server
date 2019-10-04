@@ -9,56 +9,101 @@ class activityDataService extends Service {
   async FindAll() {
     return await this.ctx.model.ActivityData.find({});
   }
+  /**
+   * 回显数据
+   * @param {string} objectName 项目名
+   */
   async findByName(objectName) {
-    let datas = [];
-    let object = await this.ctx.model.ActivityObject.find({ name: objectName });
+    const datas = [];
+    const object = await this.ctx.model.ActivityObject.find({
+      name: objectName,
+    });
     if (object.length > 0) {
-      let data = await this.ctx.model.ActivityData.find({ objectName });
+      const data = await this.ctx.model.ActivityData.find({ objectName });
       data.map(item => {
-        datas.push({
+        let itemData = {
           name: item.name,
           text: item.text,
           css: item.css,
-          id: item._id
-        });
+          id: item._id,
+        };
+        if (item.name === 'base-buttom') {
+          itemData = {
+            ...itemData,
+            refInput: item.refInput,
+            btnType: item.btnType,
+            link: item.link,
+            inputFromUrl: item.inputFromUrl,
+            urlMethod: item.urlMethod,
+          };
+        } else if (item.name === 'base-input') {
+          itemData = {
+            ...itemData,
+            inputName: item.inputName,
+          };
+        } else {
+          itemData = {
+            ...itemData,
+          };
+        }
+        datas.push(itemData);
+        return true;
       });
       return Promise.resolve({ data: datas, objHeight: object[0].height });
-    } else {
-      return Promise.reject('无此项目,请检查项目名');
     }
+    return Promise.reject(Error('无此项目,请检查项目名'));
   }
   /**
    * 移动端获取数据 包括组件数据 以及页面高度
+   * @param {string} name 项目名称
    */
   async getMobileData(name) {
-    let datas = [];
-    let object = await this.ctx.model.ActivityObject.find({ name });
+    const datas = [];
+    const object = await this.ctx.model.ActivityObject.find({ name });
     if (object.length > 0) {
-      let data = await this.ctx.model.ActivityData.find({ objectName: name });
-      console.log('数据', data);
+      const data = await this.ctx.model.ActivityData.find({ objectName: name });
       data.map(item => {
-        datas.push({
+        let itemData = {
           name: item.name,
           text: item.text,
-          inputName: item.inputName || '',
-          link: item.link || '',
-          css: item.css
-        });
+          css: item.css,
+        };
+        if (item.name === 'base-buttom') {
+          itemData = {
+            ...itemData,
+            refInput: item.refInput,
+            btnType: item.btnType,
+            link: item.link,
+            inputFromUrl: item.inputFromUrl,
+            urlMethod: item.urlMethod,
+          };
+        } else if (item.name === 'base-input') {
+          itemData = {
+            ...itemData,
+            inputName: item.inputName,
+          };
+        } else {
+          itemData = {
+            ...itemData,
+          };
+        }
+        datas.push(itemData);
+        return true;
       });
       return Promise.resolve({ objHeight: object[0].height, datas });
-    } else {
-      return Promise.reject('无此项目,请检查项目名');
     }
+    return Promise.reject(new Error('无此项目,请检查项目名'));
   }
   async setActivityData(data) {
-    let { parentName, template } = data;
+    const { parentName, template } = data;
     await this.ctx.model.ActivityData.remove({ objectName: parentName });
-    let newData = [];
+    const newData = [];
     template.map(e => {
       newData.push({
         objectName: parentName,
-        ...e
+        ...e,
       });
+      return true;
     });
     return await this.ctx.model.ActivityData.create(newData).then(
       () => parentName // 将项目名称返回出去

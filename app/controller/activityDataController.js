@@ -9,45 +9,45 @@ class activityDataController extends Controller {
   }
   async getActivity() {
     const { ctx } = this;
-    const result = await ctx.service.activityDataService
-      .findByName(ctx.params.name)
-      .then(res => {
-        ctx.body = {
-          data: res,
-          code: 200
-        };
-      })
-      .catch(error => {
-        ctx.body = {
-          data: error,
-          code: 500
-        };
-      });
+    try {
+      const result = await ctx.service.activityDataService.findByName(
+        ctx.params.name
+      );
+      ctx.body = {
+        data: result,
+        code: 200,
+      };
+    } catch (error) {
+      ctx.body = {
+        data: String(error),
+        code: 500,
+      };
+    }
   }
   async saveActivity() {
     const { ctx } = this;
-    let data = ctx.request.body;
+    const data = ctx.request.body;
     const result = await ctx.service.activityDataService.setActivityData(data);
     ctx.body = {
       data: result,
-      code: 200
+      code: 200,
     };
   }
   async getMobileData() {
     const { ctx } = this;
-    let { name } = ctx.request.body;
+    const { name } = ctx.request.body;
     await ctx.service.activityDataService
       .getMobileData(name)
       .then(res => {
         ctx.body = {
           data: res,
-          code: 200
+          code: 200,
         };
       })
       .catch(error => {
         ctx.body = {
-          data: error,
-          code: 500
+          data: String(error),
+          code: 500,
         };
       });
   }
