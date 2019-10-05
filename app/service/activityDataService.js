@@ -49,7 +49,11 @@ class activityDataService extends Service {
         datas.push(itemData);
         return true;
       });
-      return Promise.resolve({ data: datas, objHeight: object[0].height });
+      const objData = {
+        objHeight: object[0].height,
+        background: object[0].background,
+      };
+      return Promise.resolve({ data: datas, ...objData });
     }
     return Promise.reject(Error('无此项目,请检查项目名'));
   }
@@ -90,7 +94,11 @@ class activityDataService extends Service {
         datas.push(itemData);
         return true;
       });
-      return Promise.resolve({ objHeight: object[0].height, datas });
+      const objData = {
+        objHeight: object[0].height,
+        background: object[0].background,
+      };
+      return Promise.resolve({ ...objData, datas });
     }
     return Promise.reject(new Error('无此项目,请检查项目名'));
   }

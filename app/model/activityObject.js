@@ -13,7 +13,8 @@ module.exports = app => {
     name: { type: String }, // 项目名称
     disp: { type: String }, // 项目描述
     height: { type: Number }, // 页面高度
-    time: { type: Number } // 项目创建的时间
+    background: { type: String }, // 项目背景色
+    time: { type: Number }, // 项目创建的时间
   });
   return mongoose.model('activityObject', ObjectSchema);
 };

@@ -14,5 +14,8 @@ module.exports = app => {
   );
   router.post('/saveActivity', controller.activityDataController.saveActivity);
   router.post('/getTemplate', controller.activityDataController.getMobileData);
-  router.post('/updateObjHeight',controller.activityObjectController.updateObjectHeight);
+  router.post(
+    '/updateObj',
+    controller.activityObjectController.updateObject
+  );
 };

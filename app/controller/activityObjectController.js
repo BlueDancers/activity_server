@@ -13,9 +13,9 @@ class activityObjectController extends Controller {
   }
   async setObject() {
     const { ctx } = this;
-    const { name, disp, height } = ctx.request.body;
+    const { name, disp, height, background } = ctx.request.body;
     await ctx.service.activityObjectService
-      .setActivityData(name, disp, height)
+      .setActivityData(name, disp, height, background)
       .then(result => {
         ctx.body = {
           data: result,
@@ -29,13 +29,12 @@ class activityObjectController extends Controller {
         };
       });
   }
-  // 更新项目高度
-  async updateObjectHeight() {
+  // 更新项目相关信息
+  async updateObject() {
     const { ctx } = this;
-    const { height, objectName } = ctx.request.body;
-    console.log(height, objectName);
+    const { height, objectName, background } = ctx.request.body;
     await ctx.service.activityObjectService
-      .updateByNameHeight(objectName, height)
+      .updateByName(objectName, height, background)
       .then(result => {
         ctx.body = {
           data: result,

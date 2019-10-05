@@ -6,7 +6,7 @@ class activityObjectService extends Service {
   async FindAll() {
     return await this.ctx.model.ActivityObject.find({});
   }
-  async setActivityData(name, disp, height) {
+  async setActivityData(name, disp, height, background) {
     const ActivityList = await this.ctx.model.ActivityObject.find({
       name,
     });
@@ -17,6 +17,7 @@ class activityObjectService extends Service {
       name,
       disp,
       height,
+      background,
       time: new Date().getTime(),
     }).then(() => {
       return name;
@@ -26,10 +27,14 @@ class activityObjectService extends Service {
    * 更新项目高度
    * @param {String} objName 项目名称
    * @param {Number} height 项目高度
+   * @param {String} background 页面背景色
    */
-  async updateByNameHeight(objName, height) {
+  async updateByName(objName, height, background) {
     try {
-      await this.ctx.model.ActivityObject.update({ name: objName }, { height });
+      await this.ctx.model.ActivityObject.update(
+        { name: objName },
+        { height, background }
+      );
       return '更新项目成功';
     } catch (err) {
       return err;

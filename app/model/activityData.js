@@ -20,5 +20,6 @@ module.exports = app => {
     link: { type: String }, // 点击跳转地址
     css: { type: Object }, // 数据
   });
+
   return mongoose.model('activityData', DataSchema);
 };
