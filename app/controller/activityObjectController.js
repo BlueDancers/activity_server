@@ -13,9 +13,9 @@ class activityObjectController extends Controller {
   }
   async setObject() {
     const { ctx } = this;
-    const { name, disp, height, background } = ctx.request.body;
+    const { name, disp, height, background, textName } = ctx.request.body;
     await ctx.service.activityObjectService
-      .setActivityData(name, disp, height, background)
+      .setActivityData(name, disp, height, background, textName)
       .then(result => {
         ctx.body = {
           data: result,

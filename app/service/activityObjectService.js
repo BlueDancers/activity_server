@@ -6,7 +6,7 @@ class activityObjectService extends Service {
   async FindAll() {
     return await this.ctx.model.ActivityObject.find({});
   }
-  async setActivityData(name, disp, height, background) {
+  async setActivityData(name, disp, height, background, textName) {
     const ActivityList = await this.ctx.model.ActivityObject.find({
       name,
     });
@@ -14,6 +14,7 @@ class activityObjectService extends Service {
       return Promise.reject(new Error('当前项目已经存在'));
     }
     return await this.ctx.model.ActivityObject.create({
+      textName,
       name,
       disp,
       height,

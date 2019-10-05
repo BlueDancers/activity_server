@@ -10,7 +10,8 @@ module.exports = app => {
    * 项目数据模型
    */
   const ObjectSchema = new Schema({
-    name: { type: String }, // 项目名称
+    textName: { type: String }, // 项目中文名
+    name: { type: String }, // 项目路由名
     disp: { type: String }, // 项目描述
     height: { type: Number }, // 页面高度
     background: { type: String }, // 项目背景色

@@ -97,6 +97,7 @@ class activityDataService extends Service {
       const objData = {
         objHeight: object[0].height,
         background: object[0].background,
+        textName: object[0].textName,
       };
       return Promise.resolve({ ...objData, datas });
     }
