@@ -12,6 +12,7 @@ module.exports = app => {
     objectName: { type: String }, // 项目名称
     name: { type: String }, // dom元素映射关系
     inputName: { type: String }, // 文本框存在的名字,用户表单提交
+    placeholder: { type: String }, // 文本框占位符
     text: { type: String }, // dom元素具体文字
     btnType: { type: Number }, // 0 无事件 1 外部链接 2 提交表单
     refInput: { type: Array }, // 提交的表单名

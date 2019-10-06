@@ -40,6 +40,7 @@ class activityDataService extends Service {
           itemData = {
             ...itemData,
             inputName: item.inputName,
+            placeholder: item.placeholder,
           };
         } else {
           itemData = {
@@ -85,6 +86,7 @@ class activityDataService extends Service {
           itemData = {
             ...itemData,
             inputName: item.inputName,
+            placeholder: item.placeholder,
           };
         } else {
           itemData = {
