@@ -9,6 +9,10 @@ module.exports = app => {
   router.get('/getObject', controller.activityObjectController.getAllObject);
   router.post('/setObject', controller.activityObjectController.setObject);
   router.post(
+    '/deleteObj/:name',
+    controller.activityObjectController.deleteObj
+  );
+  router.post(
     '/getActivity/:name',
     controller.activityDataController.getActivity
   );
@@ -16,4 +20,5 @@ module.exports = app => {
   router.post('/getTemplate', controller.activityDataController.getMobileData);
   router.post('/updateObj', controller.activityObjectController.updateObject);
   router.post('/test', controller.testController.test);
+  router.post('/upimage', controller.imageController.upload);
 };

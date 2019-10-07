@@ -1,7 +1,6 @@
 /* eslint valid-jsdoc: "off" */
-
 'use strict';
-
+const path = require('path');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -37,7 +36,14 @@ module.exports = appInfo => {
       options: {},
     },
   };
-
+  config.static = {
+    prefix: '/static/',
+    dir: path.join(appInfo.baseDir, 'app/static'),
+    dynamic: true,
+    preload: false,
+    maxAge: 31536000,
+    buffer: false,
+  };
   return {
     ...config,
     ...userConfig,

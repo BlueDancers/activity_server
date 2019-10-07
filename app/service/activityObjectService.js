@@ -3,9 +3,20 @@
 const Service = require('egg').Service;
 
 class activityObjectService extends Service {
+  /**
+   * 查询全部项目
+   */
   async FindAll() {
     return await this.ctx.model.ActivityObject.find({});
   }
+  /**
+   * 新建项目
+   * @param {String} name
+   * @param {String} disp
+   * @param {Number} height
+   * @param {String} background
+   * @param {String} textName
+   */
   async setActivityData(name, disp, height, background, textName) {
     const ActivityList = await this.ctx.model.ActivityObject.find({
       name,
@@ -37,6 +48,19 @@ class activityObjectService extends Service {
         { height, background }
       );
       return '更新项目成功';
+    } catch (err) {
+      return err;
+    }
+  }
+  /**
+   * 删除项目
+   * @param {String} name
+   */
+  async deleteObj(name) {
+    try {
+      await this.ctx.model.ActivityObject.remove({ name });
+      await this.ctx.model.ActivityData.remove({ objectName: name });
+      return '删除成功';
     } catch (err) {
       return err;
     }

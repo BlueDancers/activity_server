@@ -29,6 +29,25 @@ class activityObjectController extends Controller {
         };
       });
   }
+  // 删除项目 以及组件
+  async deleteObj() {
+    const { ctx } = this;
+    const { name } = ctx.params;
+    await ctx.service.activityObjectService
+      .deleteObj(name)
+      .then(data => {
+        ctx.body = {
+          data,
+          code: 200,
+        };
+      })
+      .catch(err => {
+        ctx.body = {
+          data: err,
+          code: 500,
+        };
+      });
+  }
   // 更新项目相关信息
   async updateObject() {
     const { ctx } = this;
