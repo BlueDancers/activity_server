@@ -40,12 +40,13 @@ class activityObjectService extends Service {
    * @param {String} objName 项目名称
    * @param {Number} height 项目高度
    * @param {String} background 页面背景色
+   * @param {String} titlePage 缩略图
    */
-  async updateByName(objName, height, background) {
+  async updateByName(objName, height, background, titlePage) {
     try {
       await this.ctx.model.ActivityObject.update(
         { name: objName },
-        { height, background }
+        { height, background, titlePage }
       );
       return '更新项目成功';
     } catch (err) {

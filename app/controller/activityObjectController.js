@@ -51,9 +51,9 @@ class activityObjectController extends Controller {
   // 更新项目相关信息
   async updateObject() {
     const { ctx } = this;
-    const { height, objectName, background } = ctx.request.body;
+    const { height, objectName, background, titlePage } = ctx.request.body;
     await ctx.service.activityObjectService
-      .updateByName(objectName, height, background)
+      .updateByName(objectName, height, background, titlePage)
       .then(result => {
         ctx.body = {
           data: result,

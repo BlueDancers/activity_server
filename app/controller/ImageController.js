@@ -8,8 +8,8 @@ class ImageController extends Controller {
   async upload() {
     const { ctx } = this;
     const stream = await ctx.getFileStream();
+    console.log('文件', stream);
     const fileName = stream.filename;
-
     const target = path.join(this.config.baseDir, `app/static/${fileName}`);
     const result = await new Promise((resolve, reject) => {
       // 创建可写流
