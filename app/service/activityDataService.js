@@ -35,6 +35,8 @@ class activityDataService extends Service {
             link: item.link,
             inputFromUrl: item.inputFromUrl,
             urlMethod: item.urlMethod,
+            QQNum: item.QQNum,
+            PhoneNum: item.PhoneNum
           };
         } else if (item.name === 'base-input') {
           itemData = {
@@ -81,6 +83,8 @@ class activityDataService extends Service {
             link: item.link,
             inputFromUrl: item.inputFromUrl,
             urlMethod: item.urlMethod,
+            QQNum: item.QQNum,
+            PhoneNum: item.PhoneNum
           };
         } else if (item.name === 'base-input') {
           itemData = {

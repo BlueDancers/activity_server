@@ -28,7 +28,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: [ 'http://localhost:8080' ],
+    domainWhiteList: ['http://localhost:8080'],
   };
   exports.mongoose = {
     client: {

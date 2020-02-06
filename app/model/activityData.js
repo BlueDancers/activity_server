@@ -17,6 +17,8 @@ module.exports = app => {
     btnType: { type: Number }, // 0 无事件 1 外部链接 2 提交表单
     refInput: { type: Array }, // 提交的表单名
     inputFromUrl: { type: String }, // 提交的接口地址
+    QQNum: { type: String }, // 客服QQ
+    PhoneNum: { type: String }, // 客服电话
     urlMethod: { type: String }, // 请求方式
     link: { type: String }, // 点击跳转地址
     css: { type: Object }, // 数据
