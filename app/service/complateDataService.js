@@ -7,6 +7,9 @@ class complateDataService extends Service {
   async saveComplate(data) {
     return await this.ctx.model.ComplateData.create(data)
   }
+  async getComplate() {
+    return await this.ctx.model.ComplateData.find()
+  }
 }
 
 module.exports = complateDataService

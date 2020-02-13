@@ -10,6 +10,7 @@ module.exports = app => {
    * 项目数据模型
    */
   const complateData = new Schema({
+    compName: { type: String }, // 自定义组件名
     name: { type: String }, // dom元素映射关系
     inputName: { type: String }, // 文本框存在的名字,用户表单提交
     placeholder: { type: String }, // 文本框占位符

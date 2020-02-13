@@ -22,6 +22,22 @@ class complateController extends Controller {
         };
       })
   }
+  async getComplate() {
+    const { ctx } = this
+    return this.ctx.service.complateDataService.getComplate().then(data => {
+      ctx.body = {
+        data: data,
+        code: 200
+      }
+    })
+      .catch(err => {
+        console.log(err);
+        ctx.body = {
+          data: err,
+          code: 500,
+        };
+      })
+  }
 }
 
 

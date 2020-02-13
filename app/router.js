@@ -22,4 +22,5 @@ module.exports = app => {
   router.post('/test', controller.testController.test);
   router.post('/upimage', controller.imageController.upload); // 上传图片接口
   router.post('/saveSingleComplate', controller.complateController.save) // 保存单个组件
+  router.get('/getSingleComplate', controller.complateController.getComplate) // 获取单个组件列表
 };
