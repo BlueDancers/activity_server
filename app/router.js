@@ -20,5 +20,6 @@ module.exports = app => {
   router.post('/getTemplate', controller.activityDataController.getMobileData);
   router.post('/updateObj', controller.activityObjectController.updateObject);
   router.post('/test', controller.testController.test);
-  router.post('/upimage', controller.imageController.upload);
+  router.post('/upimage', controller.imageController.upload); // 上传图片接口
+  router.post('/saveSingleComplate', controller.complateController.save) // 保存单个组件
 };
