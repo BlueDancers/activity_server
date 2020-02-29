@@ -19,7 +19,6 @@ class activityDataService extends Service {
     })
     if (object.length > 0) {
       const data = await this.ctx.model.ActivityData.find({ objectName })
-      console.log(data);
       const objData = {
         objHeight: object[0].height,
         background: object[0].background
