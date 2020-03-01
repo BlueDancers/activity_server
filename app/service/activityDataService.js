@@ -40,7 +40,7 @@ class activityDataService extends Service {
         background: object[0].background,
         textName: object[0].textName
       }
-      return Promise.resolve({ ...objData, datas: data[0] })
+      return Promise.resolve({ ...objData, datas: data })
     }
     return Promise.reject(new Error('无此项目,请检查项目名'))
   }
