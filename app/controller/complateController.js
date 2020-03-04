@@ -40,6 +40,44 @@ class complateController extends Controller {
         }
       })
   }
+  async updatesingComp() {
+    const { ctx } = this
+    let { id, compName } = ctx.request.body
+    return this.ctx.service.complateDataService
+      .updatesingComp(id, compName)
+      .then(() => {
+        ctx.body = {
+          data: '修改成功',
+          code: 200
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        ctx.body = {
+          data: err,
+          code: 500
+        }
+      })
+  }
+  async deleteSingComp() {
+    const { ctx } = this
+    let { id } = ctx.request.body
+    return this.ctx.service.complateDataService
+      .deletesingComp(id)
+      .then(() => {
+        ctx.body = {
+          data: '删除成功',
+          code: 200
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        ctx.body = {
+          data: err,
+          code: 500
+        }
+      })
+  }
 }
 
 module.exports = complateController

@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-const Service = require('egg').Service;
+const Service = require('egg').Service
 
 class complateDataService extends Service {
   // 保存单个组件
@@ -26,6 +26,17 @@ class complateDataService extends Service {
   }
   async getComplate() {
     return await this.ctx.model.ComplateData.find()
+  }
+  async updatesingComp(id, name) {
+    return await this.ctx.model.ComplateData.update(
+      { _id: id },
+      { compName: name }
+    )
+  }
+  async deletesingComp(id) {
+    return await this.ctx.model.ComplateData.deleteOne({
+      _id: id
+    })
   }
 }
 
