@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-11 20:19:39
- * @LastEditTime: 2020-03-12 18:08:54
+ * @LastEditTime: 2020-03-12 23:27:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/service/templateObjectService.js
@@ -39,13 +39,13 @@ class templateObjectService extends Service {
   }
   /**
    * 删除模板
-   * @param {String} name
+   * @param {number} id
    */
-  async deleteObj(name) {
+  async deleteTemplate(id) {
     try {
-      await this.ctx.model.TemplateObject.remove({ name })
-      // 删除模板数据
-      await this.ctx.model.TemplateData.remove({ objectName: name })
+      console.log(id);
+      await this.ctx.model.TemplateObject.remove({ templateId: id })
+      await this.ctx.model.TemplateData.remove({ templateId: id })
       return '删除成功'
     } catch (err) {
       return err

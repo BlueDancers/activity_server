@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-11 20:30:30
- * @LastEditTime: 2020-03-12 17:47:06
+ * @LastEditTime: 2020-03-12 23:33:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/controller/templateController.js
@@ -44,11 +44,11 @@ class templateController extends Controller {
       })
   }
   // 删除项目 以及组件
-  async deleteObj() {
+  async deleteTemplate() {
     const { ctx } = this
-    const { name } = ctx.params
+    const { id } = ctx.request.body
     await ctx.service.templateObjectService
-      .deleteObj(name)
+      .deleteTemplate(id)
       .then(data => {
         ctx.body = {
           data,
@@ -63,11 +63,11 @@ class templateController extends Controller {
       })
   }
   // 获取模板数据
-  async getTemplate() {
+  async getTempData() {
     const { ctx } = this
     try {
-      const result = await ctx.service.templateDataService.findByName(
-        ctx.params.name
+      const result = await ctx.service.templateDataService.findById(
+        ctx.params.id
       )
       ctx.body = {
         data: result,
@@ -78,16 +78,6 @@ class templateController extends Controller {
         data: String(error),
         code: 500
       }
-    }
-  }
-  // 保存模板数据
-  async saveTemplate() {
-    const { ctx } = this
-    const data = ctx.request.body
-    const result = await ctx.service.templateDataService.setTemplateData(data)
-    ctx.body = {
-      data: result,
-      code: 200
     }
   }
 }

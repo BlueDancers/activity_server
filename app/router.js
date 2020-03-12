@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-01 16:48:52
- * @LastEditTime: 2020-03-12 18:06:23
+ * @LastEditTime: 2020-03-12 23:18:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/router.js
@@ -34,7 +34,8 @@ module.exports = app => {
   // 模板相关接口
   router.get('/getTemplate', controller.templateController.getAllObject) // 获取全部模板
   router.post('/setTemplate', controller.templateController.setTemplate) // 存储模板
-  // router.post('/getTemplateById')
+  router.get('/getTemplateDataById/:id',controller.templateController.getTempData) // 获取模板数据
+  router.post('/deleteTemplate',controller.templateController.deleteTemplate) // 删除模板
   // 测试域名
   router.post('/test', controller.testController.test)
 }

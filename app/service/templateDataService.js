@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-11 20:23:20
- * @LastEditTime: 2020-03-11 23:23:49
+ * @LastEditTime: 2020-03-12 20:52:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/service/templateDataService.js
@@ -13,21 +13,11 @@ const Service = require('egg').Service
 class templateDataService extends Service {
   /**
    * 回显数据
-   * @param {string} objectName 项目名
+   * @param {string} templateId 模板id
    */
-  async findByName(objectName) {
-    const object = await this.ctx.model.TemplateObject.find({
-      name: objectName
-    })
-    if (object.length > 0) {
-      const data = await this.ctx.model.TemplateData.find({ objectName })
-      const objData = {
-        objHeight: object[0].height,
-        background: object[0].background
-      }
-      return Promise.resolve({ data, ...objData })
-    }
-    return Promise.reject(Error('无此项目,请检查项目名'))
+  async findById(templateId) {
+      const data = await this.ctx.model.TemplateData.find({ templateId })
+      return Promise.resolve(data)
   }
   // 保存模板数据
   async setTemplateData(templateId, template) {
