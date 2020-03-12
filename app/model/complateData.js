@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-02-22 12:50:34
+ * @LastEditTime: 2020-03-11 11:37:38
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /activity_server/app/model/complateData.js
+ */
 'use strict';
 
 /**
@@ -7,7 +15,7 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   /**
-   * 项目数据模型
+   * 插件市场
    */
   const complateData = new Schema({
     compName: { type: String }, // 自定义组件名

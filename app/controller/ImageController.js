@@ -89,7 +89,29 @@ class ImageController extends Controller {
               paths.push(`http://${ctx.header.host}/static/upload/${e}`)
             }
           })
-          console.log(paths)
+          resolve(paths)
+        } else {
+          reject(err)
+        }
+      })
+    })
+    ctx.body = {
+      data,
+      code: 200
+    }
+  }
+  async getDefaultImg() {
+    const { ctx } = this
+    let data = await new Promise((resolve, reject) => {
+      var filePath = path.join(this.config.baseDir, `app/static/default/`)
+      fs.readdir(filePath, function(err, path) {
+        let paths = []
+        if (!err) {
+          path.map((e, i) => {
+            if (e != '.DS_Store') {
+              paths.push(`http://${ctx.header.host}/static/default/${e}`)
+            }
+          })
           resolve(paths)
         } else {
           reject(err)

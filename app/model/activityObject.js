@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-02-22 12:50:34
+ * @LastEditTime: 2020-03-11 11:37:45
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /activity_server/app/model/activityObject.js
+ */
 'use strict';
 
 /**
@@ -7,7 +15,7 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   /**
-   * 项目数据模型
+   * 项目表
    */
   const ObjectSchema = new Schema({
     textName: { type: String }, // 项目中文名

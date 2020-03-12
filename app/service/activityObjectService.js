@@ -1,13 +1,21 @@
-'use strict';
+/*
+ * @Author: your name
+ * @Date: 2020-02-22 12:50:34
+ * @LastEditTime: 2020-03-12 09:20:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /activity_server/app/service/activityObjectService.js
+ */
+'use strict'
 
-const Service = require('egg').Service;
+const Service = require('egg').Service
 
 class activityObjectService extends Service {
   /**
    * 查询全部项目
    */
   async FindAll() {
-    return await this.ctx.model.ActivityObject.find({});
+    return await this.ctx.model.ActivityObject.find({})
   }
   /**
    * 新建项目
@@ -19,10 +27,10 @@ class activityObjectService extends Service {
    */
   async setActivityData(name, disp, height, background, textName) {
     const ActivityList = await this.ctx.model.ActivityObject.find({
-      name,
-    });
+      name
+    })
     if (ActivityList.length > 0) {
-      return Promise.reject(new Error('当前项目已经存在'));
+      return Promise.reject(new Error('当前项目已经存在'))
     }
     return await this.ctx.model.ActivityObject.create({
       textName,
@@ -30,27 +38,27 @@ class activityObjectService extends Service {
       disp,
       height,
       background,
-      time: new Date().getTime(),
-    }).then(() => {
-      return name;
-    });
+      time: new Date().getTime()
+    }).then(data => {
+      return data._id
+    })
   }
   /**
    * 更新项目高度
-   * @param {String} objName 项目名称
+   * @param {String} objectId 项目id
    * @param {Number} height 项目高度
    * @param {String} background 页面背景色
    * @param {String} titlePage 缩略图
    */
-  async updateByName(objName, height, background, titlePage) {
+  async updateById(objectId, height, background, titlePage) {
     try {
       await this.ctx.model.ActivityObject.update(
-        { name: objName },
+        { _id: objectId },
         { height, background, titlePage }
-      );
-      return '更新项目成功';
+      )
+      return '更新项目成功'
     } catch (err) {
-      return err;
+      return err
     }
   }
   /**
@@ -59,13 +67,13 @@ class activityObjectService extends Service {
    */
   async deleteObj(name) {
     try {
-      await this.ctx.model.ActivityObject.remove({ name });
-      await this.ctx.model.ActivityData.remove({ objectName: name });
-      return '删除成功';
+      await this.ctx.model.ActivityObject.remove({ name })
+      await this.ctx.model.ActivityData.remove({ objectName: name })
+      return '删除成功'
     } catch (err) {
-      return err;
+      return err
     }
   }
 }
 
-module.exports = activityObjectService;
+module.exports = activityObjectService

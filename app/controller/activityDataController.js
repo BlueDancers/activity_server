@@ -1,17 +1,21 @@
+/*
+ * @Author: your name
+ * @Date: 2020-02-22 12:50:34
+ * @LastEditTime: 2020-03-12 08:37:40
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /activity_server/app/controller/activityDataController.js
+ */
 'use strict'
 
 const Controller = require('egg').Controller
 
 class activityDataController extends Controller {
-  async index() {
-    const { ctx } = this
-    ctx.body = await ctx.service.activityDataService.FindAll()
-  }
   async getActivity() {
     const { ctx } = this
     try {
-      const result = await ctx.service.activityDataService.findByName(
-        ctx.params.name
+      const result = await ctx.service.activityDataService.findById(
+        ctx.params.id
       )
       ctx.body = {
         data: result,

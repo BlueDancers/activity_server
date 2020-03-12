@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-02-22 12:50:34
+ * @LastEditTime: 2020-03-11 20:38:33
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /activity_server/app/controller/complateController.js
+ */
 'use strict'
 
 const Controller = require('egg').Controller
