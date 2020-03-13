@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-01 16:48:52
- * @LastEditTime: 2020-03-12 23:18:46
+ * @LastEditTime: 2020-03-13 17:17:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/router.js
@@ -19,7 +19,7 @@ module.exports = app => {
   router.post('/deleteObj/:name', controller.activityObjectController.deleteObj) // 删除项目
   router.post('/getActivity/:id', controller.activityDataController.getActivity) // 获取项目
   router.post('/saveActivity', controller.activityDataController.saveActivity) // 保存/更新项目组件数据
-  router.post('/getTemplate', controller.activityDataController.getMobileData) // 客户端获取接口
+  router.post('/getMobileTemp', controller.activityDataController.getMobileData) // 客户端获取接口
   router.post('/updateObj', controller.activityObjectController.updateObject) // 更新项目表数据
   // 图片
   router.post('/upimage', controller.imageController.upload) // 上传图片接口
@@ -34,8 +34,11 @@ module.exports = app => {
   // 模板相关接口
   router.get('/getTemplate', controller.templateController.getAllObject) // 获取全部模板
   router.post('/setTemplate', controller.templateController.setTemplate) // 存储模板
-  router.get('/getTemplateDataById/:id',controller.templateController.getTempData) // 获取模板数据
-  router.post('/deleteTemplate',controller.templateController.deleteTemplate) // 删除模板
+  router.get(
+    '/getTemplateDataById/:id',
+    controller.templateController.getTempData
+  ) // 获取模板数据
+  router.post('/deleteTemplate', controller.templateController.deleteTemplate) // 删除模板
   // 测试域名
   router.post('/test', controller.testController.test)
 }

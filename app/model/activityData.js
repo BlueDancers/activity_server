@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-22 12:50:34
- * @LastEditTime: 2020-03-12 09:04:39
+ * @LastEditTime: 2020-03-13 17:21:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/model/activityData.js
@@ -18,7 +18,7 @@ module.exports = app => {
    */
   const DataSchema = new Schema({
     parentId: { type: String }, // 项目id
-    parentName: { type: String }, // 项目名称
+    parentRouterName: { type: String }, // 项目路由名
     activityId: { type: String }, // 组件id
     name: { type: String }, // dom元素映射关系
     text: { type: String }, // dom元素具体文字

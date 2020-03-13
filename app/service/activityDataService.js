@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-01 16:48:58
- * @LastEditTime: 2020-03-12 17:16:30
+ * @LastEditTime: 2020-03-13 17:26:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/service/activityDataService.js
@@ -35,7 +35,9 @@ class activityDataService extends Service {
   async getMobileData(name) {
     const object = await this.ctx.model.ActivityObject.find({ name })
     if (object.length > 0) {
-      const data = await this.ctx.model.ActivityData.find({ objectName: name })
+      const data = await this.ctx.model.ActivityData.find({
+        parentRouterName: name
+      })
       const objData = {
         objHeight: object[0].height,
         background: object[0].background,
@@ -46,13 +48,13 @@ class activityDataService extends Service {
     return Promise.reject(new Error('无此项目,请检查项目名'))
   }
   async setActivityData(data) {
-    const { parentId, parentName, template } = data
+    const { parentId, parentRouterName, template } = data
     await this.ctx.model.ActivityData.remove({ parentId: parentId })
     const newData = []
     template.map(temp => {
       newData.push({
         parentId: parentId,
-        parentName: parentName,
+        parentRouterName: parentRouterName,
         ...temp
       })
       return true
