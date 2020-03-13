@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-22 12:50:34
- * @LastEditTime: 2020-03-12 09:21:23
+ * @LastEditTime: 2020-03-13 10:53:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/controller/activityObjectController.js
@@ -59,9 +59,8 @@ class activityObjectController extends Controller {
   // 更新项目相关信息
   async updateObject() {
     const { ctx } = this
-    const { height, objectId, background, titlePage } = ctx.request.body
     await ctx.service.activityObjectService
-      .updateById(objectId, height, background, titlePage)
+      .updateById(ctx.request.body)
       .then(result => {
         ctx.body = {
           data: result,

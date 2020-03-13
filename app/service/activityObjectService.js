@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-22 12:50:34
- * @LastEditTime: 2020-03-12 09:20:55
+ * @LastEditTime: 2020-03-13 11:44:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/service/activityObjectService.js
@@ -44,20 +44,34 @@ class activityObjectService extends Service {
     })
   }
   /**
-   * 更新项目高度
-   * @param {String} objectId 项目id
-   * @param {Number} height 项目高度
-   * @param {String} background 页面背景色
-   * @param {String} titlePage 缩略图
+   * 更新项目数据
    */
-  async updateById(objectId, height, background, titlePage) {
+  async updateById(data) {
+    const {
+      objectId,
+      height,
+      background,
+      textName,
+      name,
+      titlePage,
+      parentDisp
+    } = data
+    console.log(data)
     try {
-      await this.ctx.model.ActivityObject.update(
-        { _id: objectId },
-        { height, background, titlePage }
-      )
-      return '更新项目成功'
+      let res = await this.ctx.model.ActivityObject.findOne({ name })
+      console.log('3123123', res)
+      if (res == null || res._id == objectId) {
+        await this.ctx.model.ActivityObject.update(
+          { _id: objectId },
+          { height, background, titlePage, textName, name, disp: parentDisp }
+        )
+        return '更新项目成功'
+      } else {
+        return Promise.reject(new Error('路由名称重复,请修改路由名'))
+      }
     } catch (err) {
+      console.log(err)
+
       return err
     }
   }
