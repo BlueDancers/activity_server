@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-01 16:48:58
- * @LastEditTime: 2020-03-13 17:26:28
+ * @LastEditTime: 2020-03-14 00:35:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/service/activityDataService.js
@@ -60,7 +60,7 @@ class activityDataService extends Service {
       return true
     })
     return await this.ctx.model.ActivityData.create(newData).then(
-      () => parentId // 将项目名称返回出去
+      () => parentRouterName // 将项目名称返回出去
     )
   }
 }
