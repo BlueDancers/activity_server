@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-02-22 12:50:34
+ * @LastEditTime: 2020-03-18 17:27:57
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /activity_server/app/service/complateDataService.js
+ */
 'use strict'
 
 const Service = require('egg').Service
@@ -5,14 +13,6 @@ const Service = require('egg').Service
 class complateDataService extends Service {
   // 保存单个组件
   async saveComplate(data) {
-    if (data.name !== 'base-input') {
-      // 只有文本框有placeholder属性
-      delete data.placeholder
-    }
-    if (data.name == 'base-div') {
-      // 只有div模块没有text属性
-      delete data.text
-    }
     if (data.compName == '') {
       return Promise.reject('请填写组件保存名')
     }
