@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-22 12:50:34
- * @LastEditTime: 2020-03-13 10:53:39
+ * @LastEditTime: 2020-03-19 17:52:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/controller/activityObjectController.js
@@ -21,9 +21,8 @@ class activityObjectController extends Controller {
   }
   async setObject() {
     const { ctx } = this
-    const { name, disp, height, background, textName } = ctx.request.body
     await ctx.service.activityObjectService
-      .setActivityData(name, disp, height, background, textName)
+      .setActivityData(ctx.request.body)
       .then(result => {
         ctx.body = {
           data: result,
@@ -61,6 +60,23 @@ class activityObjectController extends Controller {
     const { ctx } = this
     await ctx.service.activityObjectService
       .updateById(ctx.request.body)
+      .then(result => {
+        ctx.body = {
+          data: result,
+          code: 200
+        }
+      })
+      .catch(err => {
+        ctx.body = {
+          data: String(err),
+          code: 500
+        }
+      })
+  }
+  async objectAuth() {
+    const { ctx } = this
+    await ctx.service.activityObjectService
+      .objectAuth(ctx.request.body)
       .then(result => {
         ctx.body = {
           data: result,

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-01 16:48:52
- * @LastEditTime: 2020-03-13 17:17:32
+ * @LastEditTime: 2020-03-19 17:55:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/router.js
@@ -21,6 +21,7 @@ module.exports = app => {
   router.post('/saveActivity', controller.activityDataController.saveActivity) // 保存/更新项目组件数据
   router.post('/getMobileTemp', controller.activityDataController.getMobileData) // 客户端获取接口
   router.post('/updateObj', controller.activityObjectController.updateObject) // 更新项目表数据
+  router.post('/objectAuth', controller.activityObjectController.objectAuth) // 效验项目权限
   // 图片
   router.post('/upimage', controller.imageController.upload) // 上传图片接口
   router.post('/uptitleimage', controller.imageController.uptitleimage) // 上传封面图片接口

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-22 12:50:34
- * @LastEditTime: 2020-03-13 11:44:22
+ * @LastEditTime: 2020-03-19 17:54:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/service/activityObjectService.js
@@ -15,7 +15,19 @@ class activityObjectService extends Service {
    * 查询全部项目
    */
   async FindAll() {
-    return await this.ctx.model.ActivityObject.find({})
+    let objetcList = await this.ctx.model.ActivityObject.find({})
+    objetcList = JSON.parse(JSON.stringify(objetcList))
+    objetcList.map((res, index) => {
+      if (res.password) {
+        console.log('添加效验')
+        res.isAuth = true
+        console.log(objetcList)
+      } else {
+        res.isAuth = false
+      }
+      delete res.password
+    })
+    return objetcList
   }
   /**
    * 新建项目
@@ -25,19 +37,19 @@ class activityObjectService extends Service {
    * @param {String} background
    * @param {String} textName
    */
-  async setActivityData(name, disp, height, background, textName) {
+  async setActivityData(data) {
     const ActivityList = await this.ctx.model.ActivityObject.find({
-      name
+      name: data.name
     })
+
     if (ActivityList.length > 0) {
       return Promise.reject(new Error('当前项目已经存在'))
     }
+    console.log(data)
     return await this.ctx.model.ActivityObject.create({
-      textName,
-      name,
-      disp,
-      height,
-      background,
+      ...data,
+      height: 667,
+      background: 'rgba(255, 255, 255, 1)',
       time: new Date().getTime()
     }).then(data => {
       return data._id
@@ -73,6 +85,20 @@ class activityObjectService extends Service {
       console.log(err)
 
       return err
+    }
+  }
+  /**
+   * 项目效验
+   * @param {String}} pass
+   */
+  async objectAuth(data) {
+    let objectData = await this.ctx.model.ActivityObject.findOne({
+      _id: data.id
+    })
+    if (objectData.password == data.password) {
+      return true
+    } else {
+      return Promise.reject(new Error('密码错误'))
     }
   }
   /**

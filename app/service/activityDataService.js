@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-01 16:48:58
- * @LastEditTime: 2020-03-14 00:35:28
+ * @LastEditTime: 2020-03-19 19:25:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/service/activityDataService.js
@@ -16,15 +16,23 @@ class activityDataService extends Service {
    * @param {string} objectName 项目名
    */
   async findById(parentId) {
-    const object = await this.ctx.model.ActivityObject.find({
+    let object = await this.ctx.model.ActivityObject.find({
       _id: parentId
     })
     if (object.length > 0) {
-      const data = await this.ctx.model.ActivityData.find(
-        { parentId },
-        { _id: 0 }
-      )
-      return Promise.resolve({ ...object[0]._doc, data: data })
+      let data = await this.ctx.model.ActivityData.find({ parentId })
+      console.log(JSON.parse(JSON.stringify(object)))
+      object = JSON.parse(JSON.stringify(object))
+      object.map((res, index) => {
+        if (res.password) {
+          console.log('添加效验')
+          res.isAuth = true
+        } else {
+          res.isAuth = false
+        }
+        delete res.password
+      })
+      return { ...object[0], data }
     }
     return Promise.reject(Error('无此项目,请检查项目名'))
   }
