@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-01 16:48:52
- * @LastEditTime: 2020-03-19 17:55:13
+ * @LastEditTime: 2020-03-20 09:06:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/router.js
@@ -16,7 +16,7 @@ module.exports = app => {
   // 项目相关接口
   router.get('/getObject', controller.activityObjectController.getAllObject) // 获取全部项目
   router.post('/setObject', controller.activityObjectController.setObject) // 新建项目
-  router.post('/deleteObj/:name', controller.activityObjectController.deleteObj) // 删除项目
+  router.post('/deleteObj', controller.activityObjectController.deleteObj) // 删除项目
   router.post('/getActivity/:id', controller.activityDataController.getActivity) // 获取项目
   router.post('/saveActivity', controller.activityDataController.saveActivity) // 保存/更新项目组件数据
   router.post('/getMobileTemp', controller.activityDataController.getMobileData) // 客户端获取接口

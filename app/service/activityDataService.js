@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-01 16:48:58
- * @LastEditTime: 2020-03-19 19:25:15
+ * @LastEditTime: 2020-03-20 14:44:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/service/activityDataService.js
@@ -23,9 +23,8 @@ class activityDataService extends Service {
       let data = await this.ctx.model.ActivityData.find({ parentId })
       console.log(JSON.parse(JSON.stringify(object)))
       object = JSON.parse(JSON.stringify(object))
-      object.map((res, index) => {
+      object.map(res => {
         if (res.password) {
-          console.log('添加效验')
           res.isAuth = true
         } else {
           res.isAuth = false
@@ -55,21 +54,54 @@ class activityDataService extends Service {
     }
     return Promise.reject(new Error('无此项目,请检查项目名'))
   }
+  // 更新项目数据
   async setActivityData(data) {
-    const { parentId, parentRouterName, template } = data
-    await this.ctx.model.ActivityData.remove({ parentId: parentId })
-    const newData = []
-    template.map(temp => {
-      newData.push({
-        parentId: parentId,
-        parentRouterName: parentRouterName,
-        ...temp
-      })
-      return true
+    const {
+      titlePage,
+      password,
+      parentId,
+      parentName,
+      parentRouterName,
+      commHeight,
+      template,
+      background,
+      parentDisp
+    } = data
+    let objectData = await this.ctx.model.ActivityObject.findOne({
+      _id: parentId
     })
-    return await this.ctx.model.ActivityData.create(newData).then(
-      () => parentRouterName // 将项目名称返回出去
-    )
+    // 效验密码
+    if (objectData.password == null || objectData.password == password) {
+      // 更新项目数据
+      await this.ctx.model.ActivityObject.update(
+        { _id: parentId },
+        {
+          height: commHeight,
+          background,
+          titlePage,
+          textName: parentName,
+          name: parentRouterName,
+          disp: parentDisp
+        }
+      )
+      // 删除项目之前的数据
+      await this.ctx.model.ActivityData.remove({ parentId: parentId })
+      const newData = []
+      template.map(temp => {
+        newData.push({
+          parentId: parentId,
+          parentRouterName: parentRouterName,
+          ...temp
+        })
+        return true
+      })
+      // 更新项目组件数据
+      return await this.ctx.model.ActivityData.create(newData).then(
+        () => parentRouterName // 将项目名称返回出去
+      )
+    } else {
+      return Promise.reject(new Error('密码错误不允许修改'))
+    }
   }
 }
 

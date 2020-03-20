@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-22 12:50:34
- * @LastEditTime: 2020-03-19 17:52:05
+ * @LastEditTime: 2020-03-20 09:05:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /activity_server/app/controller/activityObjectController.js
@@ -39,9 +39,8 @@ class activityObjectController extends Controller {
   // 删除项目 以及组件
   async deleteObj() {
     const { ctx } = this
-    const { name } = ctx.params
     await ctx.service.activityObjectService
-      .deleteObj(name)
+      .deleteObj(ctx.request.body)
       .then(data => {
         ctx.body = {
           data,
